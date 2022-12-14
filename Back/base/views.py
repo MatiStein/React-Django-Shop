@@ -1,0 +1,12 @@
+from django.shortcuts import render
+from .models import Product
+from .serializer import ProductSerializer
+from django.http import JsonResponse, HttpResponse
+
+def index(req):
+    return JsonResponse('hello', safe=False)
+
+
+def myProducts(req):
+    all_products = ProductSerializer(Product.objects.all(), many=True).data
+    return JsonResponse(all_products, safe=False)
